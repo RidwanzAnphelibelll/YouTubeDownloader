@@ -352,9 +352,11 @@ def download_video(url, quality):
                         if pbar:
                             pbar.n = percent
                             pbar.refresh()
+                            
         except (KeyboardInterrupt, SystemExit):
             if pbar:
                 pbar.close()
+                
             process.terminate()
             time.sleep(0.5)
             
@@ -391,6 +393,7 @@ def download_video(url, quality):
             print(f'{Fore.RED}Gagal mengunduh video{Style.RESET_ALL}')
             
             error_messages = []
+            
             for line in error_output[-20:]:
                 if 'ERROR' in line or 'error' in line or 'Error' in line:
                     error_messages.append(line)
@@ -409,6 +412,7 @@ def download_video(url, quality):
             
     except (KeyboardInterrupt, SystemExit):
         cleanup_partial_files()
+        
         current_download_folder = None
         current_download_title = None
         current_process = None
@@ -503,6 +507,7 @@ def download_audio(url, quality, audio_format='mp3'):
         except (KeyboardInterrupt, SystemExit):
             if pbar:
                 pbar.close()
+                
             process.terminate()
             time.sleep(0.5)
             
@@ -539,6 +544,7 @@ def download_audio(url, quality, audio_format='mp3'):
             print(f'{Fore.RED}Gagal mengunduh audio{Style.RESET_ALL}')
             
             error_messages = []
+            
             for line in error_output[-20:]:
                 if 'ERROR' in line or 'error' in line or 'Error' in line:
                     error_messages.append(line)
@@ -557,6 +563,7 @@ def download_audio(url, quality, audio_format='mp3'):
             
     except (KeyboardInterrupt, SystemExit):
         cleanup_partial_files()
+        
         current_download_folder = None
         current_download_title = None
         current_process = None
@@ -578,6 +585,8 @@ def is_valid_youtube_url(url):
         r'^https?://(www\.)?(youtube\.com|youtu\.be)/.+',
         r'^https?://(www\.)?youtube\.com/watch\?v=.+',
         r'^https?://(www\.)?youtube\.com/shorts/.+',
+        r'^https?://(www\.)?music\.youtube\.com/watch\?v=.+',
+        r'^https?://(www\.)?music\.youtube\.com/.+',
         r'^https?://youtu\.be/.+'
     ]
     
@@ -682,6 +691,7 @@ def handle_video_download():
             quality = quality_map[choice]
             download_video(url, quality)
             break
+            
         else:
             print(f'{Fore.RED}Pilihan Tidak Valid!{Style.RESET_ALL}')
             input(f'{Fore.WHITE}Tekan Enter untuk kembali...{Style.RESET_ALL}')
