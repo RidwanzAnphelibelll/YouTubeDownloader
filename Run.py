@@ -235,9 +235,6 @@ def get_available_video_formats(url):
                             if 'video only' in line.lower() or 'audio only' in line.lower():
                                 continue
                             
-                            if '│' in line or 'premium' in line.lower():
-                                continue
-                            
                             if height >= 144 and height <= 8640:
                                 if height not in video_formats:
                                 
@@ -625,6 +622,7 @@ def display_video_quality_menu(available_qualities):
     
     for quality in available_qualities:
         quality_label = f'{quality}p'
+        
         if quality >= 4320:
             quality_label += ' (8K)'
             
@@ -728,9 +726,11 @@ def handle_audio_download():
             
             if audio_format == 'flac':
                 download_audio(url, None, 'flac')
+                
             else:
                 download_audio(url, quality, 'mp3')
             break
+            
         else:
             print(f'{Fore.RED}Pilihan Tidak Valid!{Style.RESET_ALL}')
             input(f'{Fore.WHITE}Tekan Enter untuk kembali...{Style.RESET_ALL}')
@@ -768,3 +768,4 @@ def RSCoders():
 
 if __name__ == "__main__":
     RSCoders()
+    
