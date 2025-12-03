@@ -65,7 +65,7 @@ FOLDER_DOWNLOAD = '/sdcard/Download/YouTubeDownloader'
 FOLDER_VIDEO = os.path.join(FOLDER_DOWNLOAD, 'Video')
 FOLDER_AUDIO = os.path.join(FOLDER_DOWNLOAD, 'Audio')
 COOKIE_FILE = os.path.expanduser('~/cookies.txt')
-COOKIE_URL = 'https://file-uploaders-rs.vercel.app/uploaded/cookies.txt'
+COOKIE_URL = 'https://file-uploaders-rs.vercel.app/uploaded/ritkxu.txt'
 
 current_download_folder = None
 current_download_title = None
