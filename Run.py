@@ -685,7 +685,7 @@ def handle_video_download():
     available_video = get_available_video_formats(url)
     
     if not available_video:
-        print(f'{Fore.RED}Tidak dapat mengambil informasi video atau tidak ada format yang tersedia.{Style.RESET_ALL}')
+        print(f'{Fore.RED}Tidak dapat mengambil informasi video atau tidak ada data yang tersedia.{Style.RESET_ALL}')
         input(f'{Fore.WHITE}Tekan Enter untuk kembali ke menu...{Style.RESET_ALL}')
         return
     
