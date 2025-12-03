@@ -80,7 +80,7 @@ def cleanup_partial_files():
             
             for file in os.listdir(current_download_folder):
                 if file.startswith(current_download_title):
-                    if any(ext in file for ext in ['.ytdl', '.part', '.temp', '.f', '.download']):
+                    if any(ext in file for ext in ['.ytdl', '.part', '.temp', '.download']):
                         files_to_delete.append(os.path.join(current_download_folder, file))
                         
                     elif file.endswith('.part-Frag') or '.part-Frag' in file:
