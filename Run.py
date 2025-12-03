@@ -296,7 +296,7 @@ def download_video(url, quality):
             current_download_title = title
             delete_existing_file(FOLDER_VIDEO, title, 'mp4')
         
-        print(f'{Fore.GREEN}Memulai mengunduh video {quality}p...{Style.RESET_ALL}')
+        print(f'{Fore.YELLOW}Memulai mengunduh video {quality}p...{Style.RESET_ALL}')
         
         output_template = os.path.join(FOLDER_VIDEO, '%(title)s.%(ext)s')
         
@@ -376,11 +376,13 @@ def download_video(url, quality):
         
         if process.returncode == 0 or download_completed:
             print(f'{Fore.GREEN}Video Berhasil Diunduh!{Style.RESET_ALL}')
+            time.sleep(0.5)
             print(f'{Fore.BLUE}Tersimpan Di: {FOLDER_VIDEO}{Style.RESET_ALL}')
             
             if os.path.exists(FOLDER_VIDEO):
                 for file in os.listdir(FOLDER_VIDEO):
                     if file.endswith('.mp4'):
+                    
                         filepath = os.path.join(FOLDER_VIDEO, file)
                         trigger_media_scan(filepath)
             
@@ -443,9 +445,9 @@ def download_audio(url, quality, audio_format='mp3'):
             delete_existing_file(FOLDER_AUDIO, title, audio_format)
         
         if audio_format == 'flac':
-            print(f'{Fore.GREEN}Memulai mengunduh audio FLAC (Lossless)...{Style.RESET_ALL}')
+            print(f'{Fore.YELLOW}Memulai mengunduh audio FLAC (Lossless)...{Style.RESET_ALL}')
         else:
-            print(f'{Fore.GREEN}Memulai mengunduh audio {quality}kbps...{Style.RESET_ALL}')
+            print(f'{Fore.YELLOW}Memulai mengunduh audio {quality}kbps...{Style.RESET_ALL}')
         
         output_template = os.path.join(FOLDER_AUDIO, '%(title)s.%(ext)s')
         
@@ -504,6 +506,7 @@ def download_audio(url, quality, audio_format='mp3'):
                         if pbar:
                             pbar.n = percent
                             pbar.refresh()
+                            
         except (KeyboardInterrupt, SystemExit):
             if pbar:
                 pbar.close()
@@ -527,11 +530,13 @@ def download_audio(url, quality, audio_format='mp3'):
         
         if process.returncode == 0 or download_completed:
             print(f'{Fore.GREEN}Audio Berhasil Diunduh!{Style.RESET_ALL}')
+            time.sleep(0.5)
             print(f'{Fore.BLUE}Tersimpan Di: {FOLDER_AUDIO}{Style.RESET_ALL}')
             
             if os.path.exists(FOLDER_AUDIO):
                 for file in os.listdir(FOLDER_AUDIO):
                     if file.endswith(('.mp3', '.flac')):
+                    
                         filepath = os.path.join(FOLDER_AUDIO, file)
                         trigger_media_scan(filepath)
             
@@ -763,4 +768,3 @@ def RSCoders():
 
 if __name__ == "__main__":
     RSCoders()
-    
