@@ -80,7 +80,7 @@ def cleanup_partial_files():
             
             for file in os.listdir(current_download_folder):
                 if file.startswith(current_download_title):
-                    if any(ext in file for ext in ['.ytdl', '.part', '.temp', '.download']):
+                    if any(ext in file for ext in ['.ytdl', '.part']):
                         files_to_delete.append(os.path.join(current_download_folder, file))
                         
                     elif file.endswith('.part-Frag') or '.part-Frag' in file:
@@ -238,7 +238,7 @@ def get_available_video_formats(url):
                             if '│' in line or 'premium' in line.lower():
                                 continue
                             
-                            if height >= 144 and height <= 4320:
+                            if height >= 144 and height <= 8640:
                                 if height not in video_formats:
                                 
                                     video_formats[height] = {
@@ -268,7 +268,7 @@ def get_available_video_formats(url):
                 acodec = fmt.get('acodec', 'none')
                 
                 if height and width and vcodec != 'none' and acodec != 'none' and ext == 'mp4':
-                    if height >= 144 and height <= 4320:
+                    if height >= 144 and height <= 8640:
                         if height not in video_formats:
                         
                             video_formats[height] = {
@@ -620,7 +620,10 @@ def display_video_quality_menu(available_qualities):
     
     for quality in available_qualities:
         quality_label = f'{quality}p'
-        if quality >= 2160:
+        if quality >= 4320:
+            quality_label += ' (8K)'
+            
+        elif quality >= 2160:
             quality_label += ' (4K)'
             
         elif quality >= 1440:
@@ -650,15 +653,17 @@ def display_audio_quality_menu():
     
     quality_map = {
         '1': {'quality': 128, 'format': 'mp3'},
-        '2': {'quality': 256, 'format': 'mp3'},
-        '3': {'quality': 320, 'format': 'mp3'},
-        '4': {'quality': None, 'format': 'flac'}
+        '2': {'quality': 192, 'format': 'mp3'},
+        '3': {'quality': 256, 'format': 'mp3'},
+        '4': {'quality': 320, 'format': 'mp3'},
+        '5': {'quality': None, 'format': 'flac'}
     }
     
     print(f'{Fore.GREEN}[1]{Style.RESET_ALL} 128kbps (MP3)')
-    print(f'{Fore.GREEN}[2]{Style.RESET_ALL} 256kbps (MP3)')
-    print(f'{Fore.GREEN}[3]{Style.RESET_ALL} 320kbps (MP3)')
-    print(f'{Fore.GREEN}[4]{Style.RESET_ALL} FLAC (Lossless)')
+    print(f'{Fore.GREEN}[2]{Style.RESET_ALL} 192kbps (MP3)')
+    print(f'{Fore.GREEN}[3]{Style.RESET_ALL} 256kbps (MP3)')
+    print(f'{Fore.GREEN}[4]{Style.RESET_ALL} 320kbps (MP3)')
+    print(f'{Fore.GREEN}[5]{Style.RESET_ALL} FLAC (Lossless)')
     print(f'{Fore.RED}[0]{Style.RESET_ALL} Kembali')
     print(f'{Fore.CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{Style.RESET_ALL}')
     
@@ -706,7 +711,7 @@ def handle_audio_download():
     
     while True:
         quality_map = display_audio_quality_menu()
-        choice = input(f'Masukkan Pilihan [1-4/0]: ')
+        choice = input(f'Masukkan Pilihan [1-5/0]: ')
         
         if choice == '0':
             break
@@ -758,3 +763,4 @@ def RSCoders():
 
 if __name__ == "__main__":
     RSCoders()
+    
