@@ -23,7 +23,7 @@ def install_package(package):
         print(f"Menginstall Packages {package}...")
         subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
-required_packages = ['colorama', 'tqdm', 'requests']
+required_packages = ['tqdm', 'requests', 'colorama']
 
 for package in required_packages:
     install_package(package)
